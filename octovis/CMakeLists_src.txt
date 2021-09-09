@@ -5,7 +5,8 @@ if(OCTOVIS_QT5)
   find_package(Qt5OpenGL REQUIRED)
   find_package(Qt5Widgets REQUIRED)
   find_package(Qt5Xml REQUIRED)
-  set(QT_LIBRARIES Qt5::Core Qt5::Gui Qt5::OpenGL Qt5::Widgets Qt5::Xml "${OPENGL_gl_LIBRARY}" "${OPENGL_glu_LIBRARY}")
+  set(QT_LIBRARIES Qt5::Core Qt5::Gui Qt5::OpenGL Qt5::Widgets Qt5::Xml "${OPENGL_glu_LIBRARY}" OpenGL::OpenGL)
+  message(${QT_LIBRARIES})
   include_directories(
     "${Qt5Core_INCLUDE_DIRS}"
     "${Qt5Gui_INCLUDE_DIRS}"
@@ -134,10 +135,10 @@ endif()
 add_executable(octovis ${viewer_SRCS} ${viewer_UIS_H} ${viewer_MOC_SRCS} ${viewer_RES})
 
 target_link_libraries(octovis 
+octovis-shared
 #  ${QGLViewer_LIBRARIES}
   ${QT_LIBRARIES}
   ${OCTOMAP_LIBRARIES}
-  octovis-shared
 )
 
 # special handling of MacOS X:
